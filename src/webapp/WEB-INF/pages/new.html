@@ -120,23 +120,6 @@
                 <div class="col-sm-8"><h2>User <b>Details</b></h2></div>
             </div>
         </div>
-
-<!--        <form th:method="post" th:action="@{/new}" th:object="${user}">-->
-<!--            <div class="mb-3">-->
-<!--                <label for="exampleInputEmail1" class="form-label">Адрес электронной почты</label>-->
-<!--                <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">-->
-<!--            </div>-->
-<!--            <div class="mb-3">-->
-<!--                <label for="exampleInputPassword1" class="form-label">Пароль</label>-->
-<!--                <input type="password" class="form-control" id="exampleInputPassword1">-->
-<!--            </div>-->
-<!--            <div class="mb-3 form-check">-->
-<!--                <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
-<!--                <label class="form-check-label" for="exampleCheck1">Проверить меня</label>-->
-<!--            </div>-->
-<!--            <button type="submit" class="btn btn-primary">Отправить</button>-->
-<!--        </form>-->
-
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -157,7 +140,6 @@
                         <div class="mb-3">
                             <input type="text" th:field="*{secondName}" class="form-control" id="s_name">
                         </div>
-<!--                        <input type="text" placeholder="second name" th:field="*{secondName}" id="s_name">-->
                     </td>
                     <td>
                         <button type="submit" class="btn btn-primary"> Add</button>
@@ -165,7 +147,6 @@
                 </tr>
                 </tbody>
             </form>
-
         </table>
     </div>
 </div>

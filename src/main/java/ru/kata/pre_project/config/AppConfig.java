@@ -22,9 +22,12 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan("ru.kata.pre_project")
 public class AppConfig {
+    private final Environment env;
 
     @Autowired
-    private Environment env;
+    public AppConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public DataSource dataSource() {

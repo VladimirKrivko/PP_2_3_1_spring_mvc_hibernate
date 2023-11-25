@@ -9,8 +9,6 @@ public interface UserDao {
 
     List<User> getAll();
 
-    int getTotalCount();
-
     Optional<User> getById(int id);
 
     void saveOrUpdate(User user);

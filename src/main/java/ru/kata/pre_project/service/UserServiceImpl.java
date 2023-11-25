@@ -34,11 +34,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int getTotalCount() {
-        return userDao.getTotalCount();
-    }
-
-    @Override
     @Transactional
     public User edit(int id, String firstName, String secondName) {
         Optional<User> user = userDao.getById(id);

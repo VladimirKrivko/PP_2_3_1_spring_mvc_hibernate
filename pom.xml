@@ -12,7 +12,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.verson>5.3.14</spring.verson>
-<!--        <jakarta.servlet.version>6.0.0</jakarta.servlet.version>-->
         <javax.servlet.version>4.0.0</javax.servlet.version>
         <thymeleaf.version>3.1.0.RELEASE</thymeleaf.version>
         <hibernate.version>5.6.3.Final</hibernate.version>
@@ -32,12 +31,12 @@
             <artifactId>spring-orm</artifactId>
             <version>${spring.verson}</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>jakarta.servlet</groupId>-->
-<!--            <artifactId>jakarta.servlet-api</artifactId>-->
-<!--            <version>${jakarta.servlet.version}</version>-->
-<!--            <scope>provided</scope>-->
-<!--        </dependency>-->
+<!--        TODO: remove useless dependency-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring.verson}</version>
+        </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>

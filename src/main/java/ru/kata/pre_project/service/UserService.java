@@ -10,8 +10,6 @@ public interface UserService {
 
     User getById(int id);
 
-    int getTotalCount();
-
     User edit(int id, String firstName, String secondName);
 
     User add(String firstName, String secondName);

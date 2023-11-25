@@ -1,11 +1,11 @@
 package ru.kata.pre_project.dao;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kata.pre_project.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,14 +21,6 @@ public class UserDaoHibernateImpl implements UserDao {
         String hql = "from User";
         return em.createQuery(hql, User.class)
                 .getResultList();
-    }
-
-    @Override
-    @Transactional
-    public int getTotalCount() {
-        String hql = "select count(u) from User u";
-        return em.createQuery(hql, Integer.class)
-                .getSingleResult();
     }
 
     @Override

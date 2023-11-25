@@ -1,20 +1,20 @@
 package ru.kata.pre_project.dto;
 
 public class UserInfo {
-//    private int id;
+    private int id;
     private String firstName;
     private String secondName;
 
     public UserInfo() {
     }
 
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;
