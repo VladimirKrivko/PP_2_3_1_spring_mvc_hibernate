@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.kata.pre_project.dto.UserDto;
 import ru.kata.pre_project.model.User;
 import ru.kata.pre_project.service.UserService;
 
@@ -23,20 +24,20 @@ public class UserController {
 
     @GetMapping("/")
     public String users(Model model) {
-        List<User> users = userService.getAll();
+        List<UserDto> users = userService.getAll();
         model.addAttribute("users", users);
         return "users";
     }
 
     @GetMapping("/new")
     public String newUser(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserDto()); // ?????
         return "new";
     }
 
     @PostMapping("/new")
-    public String add(@ModelAttribute("user") User user) {
-        userService.add(user);
+    public String add(@ModelAttribute("user") UserDto userDto) {
+        userService.add(userDto);
         return "redirect:/";
     }
 
@@ -48,7 +49,7 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public String update(@ModelAttribute("user") User user,
+    public String update(@ModelAttribute("user") UserDto user,
                          @RequestParam(name = "id") int id) {
         userService.edit(user);
         return "redirect:/";
