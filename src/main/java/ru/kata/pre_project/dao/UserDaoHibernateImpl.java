@@ -1,7 +1,6 @@
 package ru.kata.pre_project.dao;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 import ru.kata.pre_project.model.User;
 
 import javax.persistence.EntityManager;
@@ -16,7 +15,6 @@ public class UserDaoHibernateImpl implements UserDao {
     private EntityManager em;
 
     @Override
-    @Transactional
     public List<User> getAll() {
         String hql = "from User";
         return em.createQuery(hql, User.class)
@@ -24,22 +22,16 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     @Override
-    @Transactional
-    public Optional<User> getById(int id) {
-        String hql = "from User u where u.id = :id";
-        return Optional.of(em.createQuery(hql, User.class)
-                .setParameter("id", id)
-                .getSingleResult());
+    public Optional<User> findById(int id) {
+        return Optional.of(em.find(User.class, id));
     }
 
     @Override
-    @Transactional
-    public void saveOrUpdate(User user) {
+    public void save(User user) {
         em.persist(user);
     }
 
     @Override
-    @Transactional
     public void delete(User user) {
         em.remove(user);
     }

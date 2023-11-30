@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kata.pre_project.dao.UserDao;
 import ru.kata.pre_project.model.User;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,41 +26,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getById(int id) {
-        Optional<User> user = userDao.getById(id);
-        if (user.isPresent()) {
-            return user.get();
-        }
-        throw new RuntimeException("user with id = %d not found".formatted(id));
+    public User findById(int id) {
+        return userDao.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("user with id = %d not found".formatted(id)));
     }
 
     @Override
-    @Transactional
-    public User edit(int id, String firstName, String secondName) {
-        Optional<User> user = userDao.getById(id);
-        if (user.isPresent()) {
-            User updatedUser = user.get();
-            updatedUser.setFirstName(firstName);
-            updatedUser.setSecondName(secondName);
-            userDao.saveOrUpdate(updatedUser);
-            return updatedUser;
-        }
-        throw new RuntimeException("user with id = %d not found".formatted(id));
+    public User edit(User user) {
+        return userDao.findById(user.getId())
+                .orElseThrow(() -> new EntityNotFoundException("user with id = %d not found".formatted(user.getId())))
+                .setFirstName(user.getFirstName())
+                .setSecondName(user.getSecondName());
     }
 
     @Override
-    public User add(String firstName, String secondName) {
-        User savedUser = new User();
-        savedUser.setFirstName(firstName);
-        savedUser.setSecondName(secondName);
-        userDao.saveOrUpdate(savedUser);
-        return savedUser;
+    public void add(User user) {
+        userDao.save(user);
     }
 
     @Override
-    @Transactional
     public void deleteById(int id) {
-        Optional<User> user = userDao.getById(id);
+        Optional<User> user = userDao.findById(id);
         user.ifPresent(userDao::delete);
     }
 }

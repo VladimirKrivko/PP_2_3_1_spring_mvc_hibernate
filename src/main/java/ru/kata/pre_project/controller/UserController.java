@@ -13,7 +13,6 @@ import ru.kata.pre_project.service.UserService;
 import java.util.List;
 
 @Controller
-//@RequestMapping("/")
 public class UserController {
     private final UserService userService;
 
@@ -37,22 +36,21 @@ public class UserController {
 
     @PostMapping("/new")
     public String add(@ModelAttribute("user") User user) {
-        userService.add(user.getFirstName(), user.getSecondName());
+        userService.add(user);
         return "redirect:/";
     }
 
     @GetMapping("/edit")
-    public String editUser(Model model,
-                           @RequestParam(name = "id") int id) {
-
-        model.addAttribute("user", userService.getById(id));
+    public String editUser(@RequestParam(name = "id") int id,
+                           Model model) {
+        model.addAttribute("user", userService.findById(id));
         return "edit";
     }
 
     @PostMapping("/")
     public String update(@ModelAttribute("user") User user,
                          @RequestParam(name = "id") int id) {
-        userService.edit(id, user.getFirstName(), user.getSecondName());
+        userService.edit(user);
         return "redirect:/";
     }
 
