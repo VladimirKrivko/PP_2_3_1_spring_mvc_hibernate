@@ -1,10 +1,19 @@
 package ru.kata.pre_project.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 public class UserDto {
     private int id;
+
+    @NotNull
+    @NotEmpty(message = "should not be empty")
+    @Size(min = 2, max = 32, message = "should be between 2 and 32 characters")
     private String firstName;
+
+    @Size(min = 0, max = 32, message = "can be empty or no longer than 32 characters")
     private String secondName;
 
     public UserDto() {

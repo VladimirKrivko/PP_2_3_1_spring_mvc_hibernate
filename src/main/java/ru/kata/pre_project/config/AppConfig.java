@@ -46,7 +46,6 @@ public class AppConfig {
         emf.setPackagesToScan("ru.kata.pre_project.model");
         emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         emf.setJpaProperties(additionalProperties());
-
         return emf;
     }
 
@@ -54,7 +53,6 @@ public class AppConfig {
     public PlatformTransactionManager transactionManager() {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
-
         return transactionManager;
     }
 
@@ -62,7 +60,6 @@ public class AppConfig {
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-
         return properties;
     }
 }

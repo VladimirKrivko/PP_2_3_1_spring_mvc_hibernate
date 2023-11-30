@@ -1,7 +1,6 @@
 package ru.kata.pre_project.service;
 
 import ru.kata.pre_project.dto.UserDto;
-import ru.kata.pre_project.model.User;
 
 import java.util.List;
 

@@ -5,6 +5,7 @@ import ru.kata.pre_project.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,7 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     @Override
-    public void save(User user) {
+    public void save(@Valid User user) {
         em.persist(user);
     }
 

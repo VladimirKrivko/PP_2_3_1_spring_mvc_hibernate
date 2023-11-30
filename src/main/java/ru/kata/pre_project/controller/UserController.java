@@ -3,14 +3,15 @@ package ru.kata.pre_project.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.kata.pre_project.dto.UserDto;
-import ru.kata.pre_project.model.User;
 import ru.kata.pre_project.service.UserService;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -31,13 +32,17 @@ public class UserController {
 
     @GetMapping("/new")
     public String newUser(Model model) {
-        model.addAttribute("user", new UserDto()); // ?????
+        model.addAttribute("user", new UserDto());
         return "new";
     }
 
     @PostMapping("/new")
-    public String add(@ModelAttribute("user") UserDto userDto) {
-        userService.add(userDto);
+    public String add(@ModelAttribute("user") @Valid UserDto user,
+                      BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new";
+        }
+        userService.add(user);
         return "redirect:/";
     }
 
@@ -49,8 +54,11 @@ public class UserController {
     }
 
     @PostMapping("/")
-    public String update(@ModelAttribute("user") UserDto user,
-                         @RequestParam(name = "id") int id) {
+    public String update(@ModelAttribute("user") @Valid UserDto user,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "edit";
+        }
         userService.edit(user);
         return "redirect:/";
     }
