@@ -33,6 +33,11 @@ public class UserDaoHibernateImpl implements UserDao {
     }
 
     @Override
+    public void update(User user) {
+        em.merge(user);
+    }
+
+    @Override
     public void delete(User user) {
         em.remove(user);
     }

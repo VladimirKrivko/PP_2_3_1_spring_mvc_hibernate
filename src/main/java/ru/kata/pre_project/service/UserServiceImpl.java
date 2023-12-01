@@ -10,7 +10,6 @@ import ru.kata.pre_project.model.User;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -26,7 +25,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getAll() {
-        return userDao.getAll().stream().map(user -> mapper.map(user, UserDto.class)).toList();
+        return userDao.getAll()
+                .stream()
+                .map(user -> mapper.map(user, UserDto.class))
+                .toList();
     }
 
     @Override
@@ -37,10 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void edit(UserDto userDto) {
-        userDao.findById(userDto.getId())
-                .orElseThrow(() -> new EntityNotFoundException("userDto with id = %d not found".formatted(userDto.getId())))
-                .setFirstName(userDto.getFirstName())
-                .setSecondName(userDto.getSecondName());
+        userDao.update(mapper.map(userDto, User.class));
     }
 
     @Override
@@ -50,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteById(int id) {
-        Optional<User> user = userDao.findById(id);
-        user.ifPresent(userDao::delete);
+        userDao.findById(id)
+                .ifPresent(userDao::delete);
     }
 }
