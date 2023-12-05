@@ -24,6 +24,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<UserDto> getAll() {
         return userDao.getAll()
                 .stream()
@@ -31,6 +32,7 @@ public class UserServiceImpl implements UserService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public UserDto findById(int id) {
         return mapper.map(userDao.findById(id)
